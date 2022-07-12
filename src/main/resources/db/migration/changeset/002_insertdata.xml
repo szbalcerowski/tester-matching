@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+  <changeSet id="Tester - insert data" author="Szymon Balcerowski">
+    <loadData file="classpath:data/testers.csv" tableName="tester" usePreparedStatements="true">
+      <column header="testerId" name="id"/>
+      <column header="firstName" type="string" name="first_name"/>
+      <column header="lastName" type="string" name="last_name"/>
+      <column header="lastLogin" name="last_login"/>
+      <column header="country" type="string" name="country"/>
+    </loadData>
+  </changeSet>
+
+  <changeSet id="Device - insert data" author="Szymon Balcerowski">
+    <loadData file="classpath:data/devices.csv" tableName="device" usePreparedStatements="true">
+      <column header="deviceId" name="id"/>
+      <column header="description" type="string"></column>
+    </loadData>
+  </changeSet>
+
+
+  <changeSet id="Bug - insert data" author="Szymon Balcerowski">
+    <loadData file="classpath:data/bugs.csv" tableName="bug" usePreparedStatements="true">
+      <column header="bugId" name="id"/>
+      <column header="deviceId" name="device_id"/>
+      <column header="testerId" name="tester_id"/>
+    </loadData>
+  </changeSet>
+
+    <changeSet id="Tester_Device - insert data" author="Szymon Balcerowski">
+      <loadData file="classpath:data/tester_device.csv" tableName="tester_device"
+        usePreparedStatements="true">
+        <column header="testerId" name="tester_id"/>
+        <column header="deviceId" name="device_id"/>
+      </loadData>
+    </changeSet>
+
+</databaseChangeLog>

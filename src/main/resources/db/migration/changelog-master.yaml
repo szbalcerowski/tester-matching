@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: classpath:/db/migration/changeset/001_create_initial_tables.sql
+  - include:
+      file: classpath:/db/migration/changeset/002_insertdata.xml
