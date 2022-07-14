@@ -11,25 +11,25 @@ services:
       POSTGRES_USER: admin
       POSTGRES_DB: test-matching
   #Back-end Spring Boot Application
-#  tester-matching-app:
-#    #The docker file in scrum-app build the jar and provides the docker image with the following name.
-#    build: ./
-#    container_name: tester-matching-app
-#    environment:
-#      - POSTGRESQL_HOST=tester-matching-postgres
-#    ports:
-#      - 8080:8080 # Forward the exposed port 8080 on the container to port 8080 on the host machine
-#    links:
-#      - tester-matching-postgres
-#    depends_on:
-#      - "tester-matching-postgres"
-#  #Fron-end Angular Application
-#  tester-matching-ui:
-#    build: ./angular-app
-#    container_name: tester-matching-ui
-#    ports:
-#      - 4200:80
-#    links:
-#      - tester-matching-app
-#    depends_on:
-#      - "tester-matching-app"
+  tester-matching-app:
+    #The docker file in scrum-app build the jar and provides the docker image with the following name.
+    build: ./
+    container_name: tester-matching-app
+    environment:
+      - POSTGRESQL_HOST=tester-matching-postgres
+    ports:
+      - 8080:8080 # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    links:
+      - tester-matching-postgres
+    depends_on:
+      - "tester-matching-postgres"
+  #Fron-end Angular Application
+  tester-matching-ui:
+    build: ./angular-app
+    container_name: tester-matching-ui
+    ports:
+      - 4200:80
+    links:
+      - tester-matching-app
+    depends_on:
+      - "tester-matching-app"
