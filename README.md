@@ -5,17 +5,17 @@ To run application install docker and docker-compose. Then run
 ![plot](./img.png)
 
 
-###Technologies used in backend:
+### Technologies used in backend:
 - Java 11
 - Spring Boot 2.7.1
 - JUnit 4
 - PostgreSQL
 - Liquibase
 
-###Technologies used in frontend:
+### Technologies used in frontend:
 - Angular 14
 - Bootstrap
--  Karma v6.3.20
+- Karma v6.3.20
 
 Additionally, docker and docker-compose.
 
