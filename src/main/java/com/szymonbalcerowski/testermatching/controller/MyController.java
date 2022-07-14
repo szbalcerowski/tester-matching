@@ -9,19 +9,21 @@ import com.szymonbalcerowski.testermatching.service.TesterService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
 public class MyController {
 
   private final DeviceService deviceService;
   private final TesterService testerService;
   private final TesterMatchingService testerMatchingService;
 
-  @GetMapping("/devices")
+  @GetMapping("/devices$")
   public ResponseEntity<List<DeviceDTO>> getDevices() {
     return ResponseEntity.ok().body(deviceService.getAllDevices());
   }
@@ -33,7 +35,7 @@ public class MyController {
 
   @GetMapping("/testers")
   public ResponseEntity<List<TesterWithExperienceDTO>> getTesters(
-      @RequestParam(required = false, defaultValue = "0") int page,
+      @RequestParam(required = false, defaultValue = "1") int page,
       @RequestParam(required = false, defaultValue = "5") int limit,
       @RequestParam(required = false) List<Long> devices,
       @RequestParam(required = false) List<String> countries

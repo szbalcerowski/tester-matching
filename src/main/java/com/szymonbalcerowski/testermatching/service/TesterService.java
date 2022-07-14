@@ -34,8 +34,8 @@ public class TesterService {
     QueryHelper queryHelper = getParamsAndQuery(devices, countries, "SELECT t.*, count(b) as experience ");
 
     MapSqlParameterSource params = queryHelper.getParams();
-    params.addValue("offset", pageable.getOffset());
-    params.addValue("limit",pageable.getPageNumber());
+    params.addValue("offset", pageable.getPageNumber());
+    params.addValue("limit",pageable.getOffset());
 
     String query =queryHelper.getQuery()
         .append("group by t.id ")
@@ -60,8 +60,8 @@ public class TesterService {
       query.append("t.country in (:countries) AND ");
     });
     Optional.ofNullable(devices).ifPresent(c -> {
-      params.addValue("devices", devices);
-      query.append("b.device_id in (:devices) AND ");
+      params.addValue("devices$", devices);
+      query.append("b.device_id in (:devices$) AND ");
     });
     query.append("1=1 ");
     return new QueryHelper(query,params);

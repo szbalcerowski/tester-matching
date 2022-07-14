@@ -24,5 +24,5 @@ public class TesterDTO {
   private String country;
   private Timestamp lastLogin;
 //  private Set<Bug> bugs;
-//  Set<Device> devices;
+//  Set<Device> devices$;
 }

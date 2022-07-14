@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  testerMatchingUrl: "http://localhost:8080"
 };
