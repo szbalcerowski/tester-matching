@@ -2,7 +2,7 @@ package com.szymonbalcerowski.testermatching.controller;
 
 import com.szymonbalcerowski.testermatching.dto.CountryDTO;
 import com.szymonbalcerowski.testermatching.dto.DeviceDTO;
-import com.szymonbalcerowski.testermatching.dto.TesterWithExperienceDTO;
+import com.szymonbalcerowski.testermatching.dto.TesterResponse;
 import com.szymonbalcerowski.testermatching.service.DeviceService;
 import com.szymonbalcerowski.testermatching.service.TesterMatchingService;
 import com.szymonbalcerowski.testermatching.service.TesterService;
@@ -34,7 +34,7 @@ public class MyController {
   }
 
   @GetMapping("/testers")
-  public ResponseEntity<List<TesterWithExperienceDTO>> getTesters(
+  public ResponseEntity<TesterResponse> getTesters(
       @RequestParam(required = false, defaultValue = "1") int page,
       @RequestParam(required = false, defaultValue = "5") int limit,
       @RequestParam(required = false) List<Long> devices,

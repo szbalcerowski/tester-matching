@@ -1,63 +1,40 @@
 <div class="row">
-  <div class="col-3">{{selectedCountry | async}} {{selectedDevice | async}}</div>
+  <div class="col-3"></div>
   <div class="col-6">
+    <my-multiselect [label]="'Countries'" [placeholder]="'Select countries'" [data]="countries"
+                    [dropdownSettings]="countriesDropdownSettings" (result)="selectedCountry$.next($event)"></my-multiselect>
     <div>
-      <label>Country:</label>
-      <ng-multiselect-dropdown
-        [placeholder]="'Select countries'"
-        [settings]="dropdownSettings"
-        [data]="countries"
-        [(ngModel)]="selectedItems"
-        (onDeSelectAll)="onSelectAll([])"
-        (onDeSelect)="onDeselect($event)"
-        (onSelect)="onItemSelect($event)"
-        (onSelectAll)="onSelectAll($event)"
-      >
-      </ng-multiselect-dropdown>
-<!--      <div>-->
-<!--        <input type="checkbox"  [value]="'*'" (click)="deselectAllCountries()">All-->
 
-<!--      </div>-->
-<!--      <div *ngFor="let country of countries$ | async">-->
-<!--        <input type="checkbox" [value]="country.name" [ngModel]="selectedCountryCheckbox"  (ngModelChange)="selectCountry($event, country.name)" >{{country.name}}-->
-<!--      </div>-->
-      <!--      <select class="form-control" id="selected-country" [ngModel]="selectedCountry" (ngModelChange)="selectedCountry.next($event)">-->
-      <!--        <option [value]="'*'">All</option>-->
-      <!--        <option *ngFor="let country of countries$ | async">{{ country.name }}</option>-->
-      <!--      </select>-->
-    </div>
-    <div>
-      <label>Device:</label>
-      <!--      <select class="form-control" id="selected-device" [ngModel]="selectedDevice" (ngModelChange)="selectedDevice.next($event)">-->
-      <!--        <option [value]="{id:0, description:'All'}">All</option>-->
-      <!--        <option *ngFor="let device of devices$ | async" [ngValue]="device.id">{{ device.description }}</option>-->
-      <!--      </select>-->
-    </div>
+      <my-multiselect [label]="'Devices'" [placeholder]="'Select devices'" [data]="devices" [dropdownSettings]="devicesDropdownSettings"
+                      (result)="selectedDevice$.next($event)"></my-multiselect>
 
-    <div class="table-grid">
-      <div class="table-grid-header" *ngIf="(testers$ | async)?.length !== 0">
-        <div>Id</div>
-        <div>First Name</div>
-        <div>Last Name</div>
-        <div>Country</div>
-        <div>Last login</div>
-        <div>Experiance</div>
-      </div>
-      <div class="table-grid-row" *ngFor="let advert of testers$ | async">
-        <div class="cell">{{advert.id}}</div>
-        <div class="cell">{{advert.firstName}}</div>
-        <div class="cell">{{advert.lastName}}</div>
-        <div class="cell">{{advert.country}}</div>
-        <div class="cell">{{advert.lastLogin | date : 'yyyy-MM-dd hh:mm'}}</div>
-        <div class="cell">{{advert.experience}}</div>
+      <div class="table-grid">
+        <div class="table-grid-header" *ngIf="(testers$ | async)?.length !== 0">
+          <div>Id</div>
+          <div>First Name</div>
+          <div>Last Name</div>
+          <div>Country</div>
+          <div>Last login</div>
+          <div>Experiance</div>
+        </div>
+        <div class="table-grid-row"
+             *ngFor="let tester of testers$ | async | paginate: { id: 'server', itemsPerPage: rowsPerPage, currentPage: pageNumber, totalItems: total} ">
+          <div class="cell">{{tester.id}}</div>
+          <div class="cell">{{tester.firstName}}</div>
+          <div class="cell">{{tester.lastName}}</div>
+          <div class="cell">{{tester.country}}</div>
+          <div class="cell">{{tester.lastLogin | date : 'yyyy-MM-dd hh:mm'}}</div>
+          <div class="cell">{{tester.experience}}</div>
 
-      </div>
-      <div class="col-12" *ngIf="(testers$ | async)?.length === 0">
-        <div class="alert alert-info alert-dismissable">
-          <strong>No results found!</strong>
+        </div>
+        <div class="col-12" *ngIf="(testers$ | async)?.length === 0">
+          <div class="alert alert-info alert-dismissable">
+            <strong>No results found!</strong>
+          </div>
+        </div>
+        <div class="col-12 pagination">
+          <pagination-controls (pageChange)="onPageChange($event)" id="server"></pagination-controls>
         </div>
       </div>
-      <!--      <app-loading-small *ngIf="!(adverts$ | async); else pagination"></app-loading-small>-->
     </div>
   </div>
-</div>

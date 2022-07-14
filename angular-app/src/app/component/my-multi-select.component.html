@@ -1,9 +1,9 @@
 <div>
   <label>{{label}}</label>
   <ng-multiselect-dropdown
-    [placeholder]="'Select countries'"
+    [placeholder]="placeholder"
     [settings]="dropdownSettings"
-    [data]="countries"
+    [data]="data"
     [(ngModel)]="selectedItems"
     (onDeSelectAll)="onSelectAll([])"
     (onDeSelect)="onDeselect($event)"

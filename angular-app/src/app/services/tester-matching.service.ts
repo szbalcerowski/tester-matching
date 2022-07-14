@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Country } from '../model/country.model';
 import { Device } from '../model/device.model';
-import { Tester } from '../model/tester.model';
+import { TestersResponse } from '../model/testers-response.model';
 
 @Injectable()
 export class TesterMatchingService {
@@ -21,8 +21,21 @@ export class TesterMatchingService {
     return this.http.get<Device[]>(url, {});
   }
 
-  getTesters(): Observable<Tester[]> {
+  getTesters(countries: string[], devices: number[], page: number, rowsPerPage: number): Observable<TestersResponse> {
     const url = environment.testerMatchingUrl + '/testers';
-    return this.http.get<Tester[]>(url, {});
+    return this.http.get<TestersResponse>(this.buildSearchUrl(url, countries, devices, page - 1, rowsPerPage), {});
+  }
+
+  private buildSearchUrl(baseUrl: string, countries: string[], devices: number[], page: number, rowsPerPage: number) {
+    let url = `${baseUrl}?`;
+    if (countries.length) {
+      url += `countries=${countries}&`;
+    }
+    if (devices.length) {
+      url += `devices=${devices}&`;
+    }
+    url += `page=${page}&`;
+    url += `limit=${rowsPerPage}`;
+    return url;
   }
 }

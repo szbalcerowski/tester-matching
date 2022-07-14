@@ -18,10 +18,12 @@ import * as fromServices from './services';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MyMultiSelectComponent } from './component/my-multi-select.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, MyMultiSelectComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +40,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
     NgMultiSelectDropDownModule.forRoot(),
   ],
-  providers: [...fromServices.services, ],
+  providers: [...fromServices.services,],
   bootstrap: [AppComponent]
 })
 export class AppModule {
