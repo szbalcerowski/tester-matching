@@ -6,7 +6,7 @@ To run application install docker and docker-compose. Then run
 
 
 ### Technologies used in backend:
-- Java 11
+- Java 8
 - Spring Boot 2.7.1
 - JUnit 4
 - PostgreSQL
